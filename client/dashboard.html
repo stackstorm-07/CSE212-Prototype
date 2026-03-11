@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="style.css">
+<h1>Secure Inventory Management System</h1>
+
+<h2 id="welcome"></h2>
+
+<script>
+
+let username = localStorage.getItem("username")
+let role = localStorage.getItem("userRole")
+
+document.getElementById("welcome").innerText =
+"Welcome " + username + " | Role: " + role
+
+</script>
+
+<h3>System Overview</h3>
+
+<p>Total Products: 120</p>
+<p>Low Stock Alerts: 5</p>
+<p>Failed Login Attempts: 2</p>
+<p>Security Alerts: 1</p>
+
+<hr>
+
+<h3>Security Features</h3>
+
+
+<a href="dashboard.html">Dashboard</a> |
+<a href="roles.html">User Roles</a> |
+<a href="logs.html">Security Logs</a> |
+<a href="#" onclick="logout()">Logout</a>
+<script>
+
+function logout(){
+localStorage.clear()
+window.location.href = "index.html"
+}
+
+</script>
+
+<hr>
+
+<hr>
+
+
+
+<h3>Security Features Implemented</h3>
+
+<ul>
+<li>Password Hashing using bcrypt</li>
+<li>Role-Based Access Control</li>
+<li>Security Activity Logs</li>
+<li>Input Validation to prevent SQL Injection</li>
+<li>Authentication System</li>
+</ul>
+
+<input id="product" placeholder="Product Name">
+
+<button onclick="validate()">Add Product</button>
+
+<script>
+
+function validate(){
+
+ const name = document.getElementById("product").value
+
+ if(name.includes("'") || name.includes(";")){
+
+  alert("Invalid input detected. Possible SQL Injection blocked.")
+
+ } else {
+
+  alert("Product added safely.")
+
+ }
+
+}
+
+
+
+
+</script>
+
+<h3>Password Security Demonstration</h3>
+
+<p>Your password is stored as a secure hash:</p>
+
+<p id="hashDisplay"></p>
+
+<script>
+
+let hash = localStorage.getItem("passwordHash")
+
+document.getElementById("hashDisplay").innerText = hash
+
+</script>

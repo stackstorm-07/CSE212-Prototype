@@ -1,0 +1,64 @@
+<script>
+
+let role = localStorage.getItem("userRole")
+
+if(role !== "Admin"){
+alert("Access denied. Only Admin can view role management.")
+window.location.href = "dashboard.html"
+}
+
+</script>
+
+<link rel="stylesheet" href="style.css">
+<h1>Secure Inventory Management System</h1>
+<h2>User Roles (Role-Based Access Control)</h2>
+
+<p>
+This page demonstrates Role-Based Access Control (RBAC). 
+Different users are assigned different permissions to prevent unauthorized actions in the inventory system.
+</p>
+
+<table border="1">
+<tr>
+<th>User</th>
+<th>Role</th>
+<th>Permissions</th>
+</tr>
+
+<tr>
+<td>Admin</td>
+<td>Full Access</td>
+<td>Add / Edit / Delete Products</td>
+</tr>
+
+<tr>
+<td>Staff</td>
+<td>Limited Access</td>
+<td>Update Inventory Only</td>
+</tr>
+
+<tr>
+<td>Viewer</td>
+<td>Read Only</td>
+<td>View Inventory</td>
+</tr>
+
+</table>
+<body>
+
+<hr>
+
+<a href="dashboard.html">Dashboard</a> |
+<a href="roles.html">User Roles</a> |
+<a href="logs.html">Security Logs</a> |
+<a href="#" onclick="logout()">Logout</a>
+<script>
+
+function logout(){
+localStorage.clear()
+window.location.href = "index.html"
+}
+
+</script>
+
+<hr>

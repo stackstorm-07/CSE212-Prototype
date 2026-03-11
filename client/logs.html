@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="style.css">
+<h1>Secure Inventory Management System</h1>
+<h2>Security Logs</h2>
+
+
+<p>
+This page shows security logs that record system activities such as login attempts and inventory updates. 
+Monitoring logs helps detect suspicious behavior.
+</p>
+
+<body>
+
+<hr>
+
+<a href="dashboard.html">Dashboard</a> |
+<a href="roles.html">User Roles</a> |
+<a href="logs.html">Security Logs</a> |
+<a href="#" onclick="logout()">Logout</a>
+<script>
+
+function logout(){
+localStorage.clear()
+window.location.href = "index.html"
+}
+
+</script>
+
+<hr>
+
+<ul id="logs"></ul>
+
+<script>
+
+fetch("http://localhost:5000/logs")
+.then(res=>res.json())
+.then(data=>{
+
+ const list = document.getElementById("logs")
+
+ data.forEach(log=>{
+
+  const item = document.createElement("li")
+
+  item.textContent =
+  log.user + " | " + log.action + " | " + log.time
+
+  list.appendChild(item)
+
+ })
+
+})
+
+</script>

@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="style.css">
+<h2>Secure Inventory System Login</h2>
+
+<input id="username" placeholder="Username">
+<br><br>
+
+<input id="password" type="password" placeholder="Password">
+<br><br>
+
+<button onclick="login()">Login</button>
+
+<p id="message"></p>
+
+<script>
+
+async function login(){
+
+let username = document.getElementById("username").value
+let password = document.getElementById("password").value
+
+let role=""
+
+if(username==="admin" && password==="admin123"){
+role="Admin"
+}
+else if(username==="staff" && password==="staff123"){
+role="Staff"
+}
+else if(username==="viewer" && password==="viewer123"){
+role="Viewer"
+}
+else{
+document.getElementById("message").innerText="Invalid login"
+return
+}
+
+/* HASH PASSWORD USING SERVER */
+
+const response = await fetch("http://localhost:5000/hash",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify({password})
+})
+
+const data = await response.json()
+
+localStorage.setItem("passwordHash",data.hashedPassword)
+localStorage.setItem("userRole",role)
+localStorage.setItem("username",username)
+
+window.location.href="dashboard.html"
+
+}
+
+async function hashPassword(){
+
+ const password = document.getElementById("password").value;
+
+ const response = await fetch("http://localhost:5000/hash",{
+  method:"POST",
+  headers:{
+   "Content-Type":"application/json"
+  },
+  body: JSON.stringify({password})
+ });
+
+ const data = await response.json();
+
+ alert("Password stored securely as hash.");
+
+ window.location.href = "dashboard.html";
+}
+</script>
